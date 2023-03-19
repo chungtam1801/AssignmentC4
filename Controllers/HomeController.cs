@@ -37,5 +37,54 @@ namespace Assignment.Controllers
             var clotheses = _clothesService.GetAllClothes();
             return View(clotheses);
         }
+        public IActionResult Details(Guid id)
+        {
+            var clothes = _clothesService.GetClothesById(id);
+            return View(clothes);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Clothes p)
+        {
+            if(_clothesService.CreateClothes(p))
+            {
+                return RedirectToAction("ListClotheses");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        [HttpGet]
+        public IActionResult Edit(Guid id)
+        {
+            var clothes = _clothesService.GetClothesById(id);
+            return View(clothes);
+        }
+        public IActionResult Edit(Clothes p)
+        {
+            if (_clothesService.UpdateClothes(p))
+            {
+                return RedirectToAction("ListClotheses");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+        public IActionResult Delete(Guid id)
+        {
+            if (_clothesService.DeleteClothes(id))
+            {
+                return RedirectToAction("ListClotheses");
+            }
+            else
+            {
+                return View("Index");
+            }
+        }
     }
 }
