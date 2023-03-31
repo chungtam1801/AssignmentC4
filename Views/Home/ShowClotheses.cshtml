@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Assignment.Models.Clothes>
+
+@{
+	ViewData["Title"] = "ShowClotheses";
+}
+
+<h1>Danh sách quần áo</h1>
+
+@*<div class="row">
+	@foreach (var item in Model)
+	{
+		<div class="col-md-3" style="margin-bottom:10px">
+			<div class="card" style="width: 100%">
+				<img src="img/indexpt1.webp" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title" align="left">
+						@Html.DisplayFor(modelItem => item.Name)
+					</h5>
+					<p class="card-text" align="left">
+						<span class="fs-pr">
+							@Html.DisplayFor(modelItem => item.Price)
+						</span>
+					</p>
+					<div class="row">
+						<div class="col-md-5" style="padding: 0px;">
+							<a href="#" class="btn btn-primary bh" style="width:95%">Mua ngay</a>
+						</div>
+						<div class="col-md-7" style="padding: 0px;">
+							<a href="#" class="btn btn-primary bh">Thêm vào giỏ hàng</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>*@
+
+<div style="width:100%;height:auto;background-color:whitesmoke;padding-top: 20px;padding-bottom: 20px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3" style="background-color:white;padding: 20px;">
+				<h6 style="font-weight:bold">Tất cả danh mục</h6>
+				<hr>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" href="#">Action</a></li>
+					<li><a class="dropdown-item" href="#">Another action</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="#">Something else here</a></li>
+				</ul>
+				<p style="font-weight:bold">Áo</p>
+				<p style="color:brown">Áo sơ mi</p>
+				<p>Áo thun</p>
+				<p>Áo polo</p>
+				<p>Áo len</p>
+				<p>Áo nỉ</p>
+				<p>Áo khoác</p>
+				<p>Áo hoodie</p>
+				<p>Áo vest</p>
+				<p>Áo ba lỗ</p>
+				<p style="font-weight:bold">Quần</p>
+				<p>Quần jean</p>
+				<p>Quần jogger</p>
+				<p>Quần tây</p>
+				<p>Quần short</p>
+				<p>Quần kaki</p>
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					@foreach (var item in Model)
+					{
+						<div class="col-md-4" style="margin-bottom:10px">
+							<div class="card" style="width: 100%">
+								<a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
+									<img src="img/indexpt1.webp" class="card-img-top" alt="...">
+								</a>
+								<div class="card-body">
+									<h5 class="card-title" align="left">
+										@Html.DisplayFor(modelItem => item.Name)
+									</h5>
+									<p class="card-text" align="left">
+										Giá: @Html.DisplayFor(modelItem => item.Price)
+									</p>
+									<p class="card-text" align="left">
+										Số lượng tồn: @Html.DisplayFor(modelItem => item.Quantity)
+									</p>
+									<div class="row">
+										<div class="col-md-5" style="padding: 0px;">
+											<a href="#" class="btn btn-primary bh" style="padding-left: 17px;padding-right: 17px">Mua ngay</a>
+										</div>
+										<div class="col-md-7" style="padding: 0px;">
+											<a href="#" class="btn btn-primary bh" style="padding-left: 11px;padding-right: 11px">Thêm vào giỏ hàng</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<nav aria-label="Page navigation example" style="background-color: whitesmoke;padding-bottom: 20px;">
+	<ul class="pagination justify-content-center" style="margin-bottom:0px">
+		<li class="page-item">
+			<a class="page-link index-tb" href="#" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		<li class="page-item"><a class="page-link index-tb" href="#" style="text-align:center">1</a></li>
+		<li class="page-item"><a class="page-link index-tb" href="#" style="text-align:center">2</a></li>
+		<li class="page-item"><a class="page-link index-tb" href="#" style="text-align:center">3</a></li>
+		<li class="page-item">
+			<a class="page-link index-tb" href="#" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+

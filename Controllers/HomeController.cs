@@ -19,7 +19,8 @@ namespace Assignment.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var clotheses = _clothesService.GetAllClothes();
+            return View(clotheses);
         }
 
         public IActionResult Privacy()
@@ -32,11 +33,19 @@ namespace Assignment.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Route("ListClotheses")]
         public IActionResult ListClotheses()
         {
             var clotheses = _clothesService.GetAllClothes();
             return View(clotheses);
         }
+        [Route("ShowClotheses")]
+        public IActionResult ShowClotheses()
+        {
+            var clotheses = _clothesService.GetAllClothes().Where(x=>x.Status<3);
+            return View(clotheses);
+        }
+        [Route("Detail")]
         public IActionResult Details(Guid id)
         {
             var clothes = _clothesService.GetClothesById(id);
@@ -72,7 +81,8 @@ namespace Assignment.Controllers
             }
             else
             {
-                return BadRequest();
+                TempData["AlertMessage"] = "Sửa thất bại";
+                return RedirectToAction("ListClotheses");
             }
         }
         public IActionResult Delete(Guid id)

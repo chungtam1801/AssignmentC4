@@ -59,15 +59,21 @@ namespace Assignment.Services
             try
             {
                 var clothes = context.Clotheses.Find(p.ID);
-                //clothes.Quantity = p.Quantity;
-                //clothes.Price = p.Price;
-                context.SaveChanges();
-                return true;
+                if(clothes.Price>p.Price)
+                {
+                    clothes.Name = p.Name;
+                    clothes.Quantity = p.Quantity;
+                    clothes.Price = p.Price;
+                    clothes.Supplier = p.Supplier;
+                    clothes.Description = p.Description;
+                    context.SaveChanges();
+                    return true;
+                }
+                return false;
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
     }
