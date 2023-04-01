@@ -18,6 +18,10 @@ namespace Assignment.Models
         public DbSet<Clothes> Clotheses { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ClothesDetail> ClothesDetails { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ClothesType> ClothesTypes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

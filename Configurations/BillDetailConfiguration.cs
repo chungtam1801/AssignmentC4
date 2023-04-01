@@ -12,7 +12,7 @@ namespace Assignment.Configurations
             builder.HasKey(p => p.ID);
             builder.Property(p => p.Price).HasColumnType("int");
             builder.Property(c => c.Quantity).HasColumnType("int");
-            builder.HasOne(x => x.Clothes).WithMany(x => x.BillDetails).HasForeignKey(x => x.ClothesID);
+            builder.HasOne(x => x.ClothesDetail).WithMany(x => x.BillDetails).HasForeignKey(x => x.ClothesDetailID);
             builder.HasOne(x => x.Bill).WithMany(x => x.BillDetails).HasForeignKey(x => x.BillID);
         }
     }

@@ -10,8 +10,8 @@ namespace Assignment.Configurations
         {
             builder.ToTable("CartDetil");
             builder.Property(x => x.Quantity).HasColumnType("int").IsRequired();
-            builder.HasOne(x => x.Clothes).WithMany(x => x.CartDetails).HasForeignKey(x => x.ClothesID);
+            builder.HasOne(x => x.ClothesDetail).WithMany(x => x.CartDetails).HasForeignKey(x => x.ClothesDetailID);
             builder.HasOne(x => x.Cart).WithMany(x => x.CartDetails).HasForeignKey(x => x.UserID);
-    }
+        }
     }
 }

@@ -62,7 +62,6 @@ namespace Assignment.Services
                 if(clothes.Price>p.Price)
                 {
                     clothes.Name = p.Name;
-                    clothes.Quantity = p.Quantity;
                     clothes.Price = p.Price;
                     clothes.Supplier = p.Supplier;
                     clothes.Description = p.Description;

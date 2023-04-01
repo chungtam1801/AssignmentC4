@@ -96,5 +96,9 @@ namespace Assignment.Controllers
                 return View("Index");
             }
         }
+        //public IActionResult ShowCart()
+        //{
+        //    List<CartDetail> lst = _clothesService.GetClothes();
+        //}
     }
 }
