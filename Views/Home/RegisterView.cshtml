@@ -1,0 +1,25 @@
+﻿@model Assignment.Models.User
+
+<div style="background-color:whitesmoke;padding: 100px;">
+	<form method="post" style="width:450px;margin:0px auto;border: solid white 1px;background-color: white;padding: 20px;" asp-action="Register">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<p class="dk" style="text-align:center;font-weight:bold;font-size: 20px;">TẠO TÀI KHOẢN</p>
+		<!-- <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+		<label class="form-check-label" for="flexRadioDefault1" style="margin-right:20px">
+			Đăng kí bằng email
+		</label>
+		<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+		<label class="form-check-label" for="flexRadioDefault1">
+			Đăng kí bằng số điện thoại
+		</label> -->
+		<div class="mb-3" style="margin-top:20px">
+			<input asp-for="UserName" class="form-control dk" id="exampleInputEmail1" placeholder="Username" style="margin-bottom: 0px;">
+			<span asp-validation-for="UserName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<input asp-for="Password" class="form-control dk" placeholder="Mật khẩu">                     
+			<span asp-validation-for="Password" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary dk" style="background-color:black;border-color:black;font-weight:bold">ĐĂNG KÍ</button>
+	</form>
+</div>

@@ -6,8 +6,8 @@
         public int Quantity { get; set; }
         public int Status { get; set; }
         public Guid ClothesID { get; set; }
-        public Guid ColorID { get; set; }
-        public Guid SizeID { get; set; }
+        public Guid? ColorID { get; set; }
+        public Guid? SizeID { get; set; }
         public virtual Clothes Clothes { get; set; }
         public virtual Color Color { get; set; }
         public virtual Size Size { get; set; }

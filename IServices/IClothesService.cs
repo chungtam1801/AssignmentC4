@@ -1,4 +1,5 @@
 ﻿using Assignment.Models;
+using Assignment.ViewModels;
 
 namespace Assignment.IServices
 {
@@ -10,5 +11,9 @@ namespace Assignment.IServices
         public bool CreateClothes(Clothes p);
         public bool UpdateClothes(Clothes p);
         public bool DeleteClothes(Guid id);
+        public List<ClothesVM> GetAllClothesView();
+        public List<Size> GetSizeClothes(Guid id);
+        public List<Color> GetColorClothes(Guid id);
+
     }
 }

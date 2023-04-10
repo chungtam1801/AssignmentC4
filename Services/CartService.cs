@@ -28,6 +28,10 @@ namespace Assignment.Services
         {
             try
             {
+                foreach(var x in context.CartDetails.Where(x=>x.UserID==id))
+                {
+                    context.CartDetails.Remove(x);
+                }
                 Cart p = context.Carts.Find(id);
                 context.Carts.Remove(p);
                 context.SaveChanges();

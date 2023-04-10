@@ -14,6 +14,8 @@ namespace Assignment.Services
         {
             try
             {
+                p.RoleID = new Guid("3BF76F38-7825-4A69-98C2-5AADB5E13F63");
+                p.Status = 1;
                 context.Users.Add(p);
                 context.SaveChanges();
                 return true;
@@ -49,12 +51,15 @@ namespace Assignment.Services
             return context.Users.Find(id);
         }
 
-        public List<User> GetUserByName(string name)
+        public User? GetUserByName(string name)
         {
-            return context.Users.Where(p => p.UserName.Contains(name)).ToList();
+            return context.Users.FirstOrDefault(p => p.UserName == name);
 
         }
-
+        public User? Login(string name,string password)
+        {
+            return context.Users.FirstOrDefault(x=>x.UserName == name && x.Password == password);
+        }
         public bool UpdateUser(User p)
         {
             try

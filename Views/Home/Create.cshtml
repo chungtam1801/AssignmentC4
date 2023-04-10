@@ -1,7 +1,7 @@
-﻿@model Assignment.Models.Clothes
+﻿@model Assignment.ViewModels.CreateClothesVM
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
@@ -9,55 +9,101 @@
 <h4>Clothes</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Supplier" class="control-label"></label>
-                <input asp-for="Supplier" class="form-control" />
-                <span asp-validation-for="Supplier" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<div class="col-md-5">
+		<form asp-action="Create" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="clothes.Name" class="control-label"></label>
+				<div class="row">
+					<div class="col-md-9">
+						<input asp-for="clothes.Name" class="form-control" />
+					</div>
+				</div>
+				<span asp-validation-for="clothes.Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="clothes.Price" class="control-label"></label>
+				<div class="row">
+					<div class="col-md-9">
+						<input asp-for="clothes.Price" class="form-control" />
+					</div>
+				</div>
+				<span asp-validation-for="clothes.Price" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="clothes.Supplier" class="control-label"></label>
+				<div class="row">
+					<div class="col-md-9">
+						<input asp-for="clothes.Supplier" class="form-control" />
+					</div>
+				</div>
+				<span asp-validation-for="clothes.Supplier" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="clothes.Description" class="control-label"></label>
+				<div class="row">
+					<div class="col-md-9">
+						<input asp-for="clothes.Description" class="form-control" />
+					</div>
+				</div>
+				<span asp-validation-for="clothes.Description" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Color</label>
+				<div class="row">
+					<div class="col-md-9">
+						<select asp-for="clothesDetail.ColorID" class="form-control">
+							@foreach (var x in ViewBag.ListColor)
+							{
+								<option value="@x.ID">@x.Value</option>
+							}
+						</select>
+					</div>
+					<div class="col-md-2">
+						<button class="form-control" data-toggle="modal" data-target="#addColor" data-url="@Url.Action("CreateColor")">+</button>
+					</div>
+				</div>
+				<span asp-validation-for="clothesDetail.ColorID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Size</label>
+				<div class="row">
+					<div class="col-md-9">
+						<select asp-for="clothesDetail.SizeID" class="form-control">
+							@foreach (var x in ViewBag.ListSize)
+							{
+								<option value="@x.ID">@x.Value</option>
+							}
+						</select>
+					</div>
+					<div class="col-md-2">
+						<button class="form-control" data-toggle="modal" data-target="#addColor" data-url="@Url.Action("CreateColor")">+</button>
+					</div>
+				</div>
+				<span asp-validation-for="clothesDetail.SizeID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="clothesDetail.Quantity" class="control-label"></label>
+				<div class="row">
+					<div class="col-md-9">
+						<input asp-for="clothesDetail.Quantity" class="form-control" />
+					</div>
+				</div>
+				<span asp-validation-for="clothesDetail.Quantity" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	}

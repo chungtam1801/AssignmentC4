@@ -15,6 +15,7 @@ namespace Assignment.Configurations
             builder.Property(x => x.Status).HasColumnType("int").IsRequired();
             builder.Property(x => x.Supplier).HasColumnType("nvarchar(100)").IsRequired();
             builder.Property(x => x.Description).HasColumnType("nvarchar(100)");
+            builder.Property(x => x.ImamgeLocation).HasColumnType("varchar(100)");
             builder.HasOne(x => x.ClothesType).WithMany(x => x.Clotheses).HasForeignKey(x => x.ClothesTypeID);
         }
     }

@@ -1,4 +1,4 @@
-﻿@model Assignment.Models.Clothes
+﻿@model Assignment.ViewModels.ClothesDetailVM
 
 @{
 	ViewData["Title"] = "Details";
@@ -35,7 +35,7 @@
 						@Html.DisplayFor(model => model.Name)
 					</h4>
 					<p>
-						Loại: <span class="hl">Áo</span>&emsp;|&emsp;MSP: <span class="hl">
+						Loại: <span class="hl">@Html.DisplayFor(model => model.Type)</span>&emsp;|&emsp;MSP: <span class="hl">
 							@Html.DisplayFor(model => model.ID)
 						</span>
 					</p>
@@ -44,13 +44,23 @@
 						<span class="fs-pr" style="font-size:15px"></span>
 					</h4>
 					<hr>
-					<p>Kích thước: <span style="font-weight:bold">S</span></p>
+					<p>
+						Màu sắc: <span style="font-weight:bold">@Html.DisplayFor(model => model.Color)</span> &emsp; Kích thước: <span style="font-weight:bold">@Html.DisplayFor(model => model.Size)</span>&emsp; Số lượng: <span style="font-weight:bold">@Html.DisplayFor(model => model.Quantity)</span>
+					</p>
 					<nav aria-label="...">
 						<ul class="pagination">
-							<li class="page-item"><a class="page-link index-sz">S</a></li>
-							<li class="page-item"><a class="page-link index-sz">M</a></li>
-							<li class="page-item"><a class="page-link index-sz">L</a></li>
-							<li class="page-item"><a class="page-link index-sz">XL</a></li>
+							@foreach (var x in ViewBag.ListColor)
+							{
+								<li class="page-item"><a class="page-link btn" style="margin-right:5px;border-radius:0px;color:black;" asp-area="" asp-controller="Home" asp-action="GetColor" asp-route-id="@x.ID">@x.Value</a></li>
+							}
+						</ul>
+					</nav>
+					<nav aria-label="...">
+						<ul class="pagination">
+							@foreach (var x in ViewBag.ListSize)
+							{
+								<li class="page-item"><a class="page-link btn" style="margin-right:5px;border-radius:0px;color:black;" asp-area="" asp-controller="Home" asp-action="GetSize" asp-route-id="@x.ID">@x.Value</a></li>
+							}
 						</ul>
 					</nav>
 					<nav aria-label="Page navigation example">
@@ -58,8 +68,8 @@
 							<li class="page-item"><a class="page-link sl" href="#">-</a></li>
 							<li class="page-item"><a class="page-link sl" style="border-left: none;">1</a></li>
 							<li class="page-item"><a class="page-link sl" style="border-left: none">+</a></li>
-							<li class="page-item"><a class="page-link tvgh">Thêm vào giỏ</a></li>
-							<li class="page-item"><a class="page-link mg">Mua ngay</a></li>
+							<li class="page-item"><a class="page-link tvgh" asp-area="" asp-controller="Home" asp-action="AddClothesToCart" asp-route-id="@Model.ID">Thêm vào giỏ</a></li>
+							<li class="page-item"><a class="page-link mg" asp-area="" asp-controller="Home" asp-action="BuyNow" asp-route-id="@Model.ID">Mua ngay</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -80,130 +90,5 @@
 				</p>
 			</div>
 		</div>
-		@*<div class="row" style="margin-top:20px">
-		<div class="col-md-12" style="background-color:white;padding: 10px;">
-		<h5 style="font-weight:bold" align="center">SẢN PHẨM LIÊN QUAN</h5>
-		<hr>
-		<div id="carouselExampleIndicators" class="carousel slide">
-		<div class="carousel-indicators" style="margin:0px;">
-		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: black;"></button>
-		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: black;"></button>
-		</div>
-		<div class="carousel-inner">
-		<div class="carousel-item active btn-slide">
-		<div class="row">
-		<div class="col-md-3" ng-repeat="qa in lstQA | limitTo : 4">
-		<div class="card" style="width: 100%" ng-click="detailSP(qa.id)">
-		<img src="{{qa.img}}" class="card-img-top" alt="...">
-		<div class="card-body">
-		<h5 class="card-title" align="left">{{qa.name}}
-		</h5>
-		<p class="card-text" align="left">
-		<span class="ls-pr">{{qa.lprice}}</span><span class="fs-pr">{{qa.fprice}}</span>
-		</p>
-		<div class="row">
-		<div class="col-md-5" style="padding: 0px;">
-		<a href="#" class="btn btn-primary bh" style="width:95%">Mua ngay</a>
-		</div>
-		<div class="col-md-7" style="padding: 0px;">
-		<a href="#" class="btn btn-primary bh" >Thêm vào giỏ hàng</a>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<div class="carousel-item btn-slide">
-		<div class="row">
-		<div class="col-md-3" ng-repeat="qa in lstQA | limitTo : 4">
-		<div class="card" style="width: 100%" ng-click="detailSP(qa.id)">
-		<img src="{{qa.img}}" class="card-img-top" alt="...">
-		<div class="card-body">
-		<h5 class="card-title" align="left">{{qa.name}}
-		</h5>
-		<p class="card-text" align="left">
-		<span class="ls-pr">{{qa.lprice}}</span><span class="fs-pr">{{qa.fprice}}</span>
-		</p>
-		<div class="row">
-		<div class="col-md-5" style="padding: 0px;">
-		<a href="#" class="btn btn-primary bh" style="width:95%">Mua ngay</a>
-		</div>
-		<div class="col-md-7" style="padding: 0px;">
-		<a href="#" class="btn btn-primary bh" >Thêm vào giỏ hàng</a>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="width:50px">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="width:50px">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-		</button>
-		</div>
-		</div>
-		</div>*@
 	</div>
 </div>
-
-@*
-<div>
-	<h4>Clothes</h4>
-	<hr />
-	<dl class="row">
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.ID)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.ID)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Name)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Name)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Price)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Price)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Quantity)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Quantity)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Status)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Status)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Supplier)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Supplier)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Description)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Description)
-		</dd>
-	</dl>
-</div>
-<div>
-	@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-	<a asp-action="Index">Back to List</a>
-</div>
-*@

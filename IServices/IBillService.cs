@@ -1,4 +1,5 @@
 ﻿using Assignment.Models;
+using Assignment.ViewModels;
 
 namespace Assignment.IServices
 {
@@ -9,5 +10,7 @@ namespace Assignment.IServices
         public bool CreateBill(Bill x);
         public bool UpdateBill(Bill x);
         public bool DeleteBill(Guid id);
+        public List<BillChartVM> GetBillChartVM();
+
     }
 }

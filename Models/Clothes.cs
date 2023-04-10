@@ -8,6 +8,7 @@
         public int Status { get; set; }
         public string Supplier { get; set; }
         public string Description { get; set; }
+        public string ImamgeLocation { get; set; }
         public Guid ClothesTypeID { get; set; }
         public virtual ClothesType ClothesType { get; set; }
         public virtual IEnumerable<ClothesDetail> ClothesDetails { get; set; }

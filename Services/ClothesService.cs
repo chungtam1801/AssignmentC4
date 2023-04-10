@@ -1,19 +1,23 @@
 ﻿using Assignment.IServices;
 using Assignment.Models;
+using Assignment.ViewModels;
 
 namespace Assignment.Services
 {
     public class ClothesService : IClothesService
     {
         AssignmentDBContext context;
+        private IClothesDetailService _clothesDetailService;
         public ClothesService()
         {
             context = new AssignmentDBContext();
+            _clothesDetailService = new ClothesDetailService();
         }
         public bool CreateClothes(Clothes p)
         {
             try
             {
+                p.ClothesTypeID = new Guid("06219696-300B-4596-B941-9B8276FB1F9A");
                 context.Clotheses.Add(p);
                 context.SaveChanges();
                 return true;
@@ -59,21 +63,44 @@ namespace Assignment.Services
             try
             {
                 var clothes = context.Clotheses.Find(p.ID);
-                if(clothes.Price>p.Price)
-                {
-                    clothes.Name = p.Name;
-                    clothes.Price = p.Price;
-                    clothes.Supplier = p.Supplier;
-                    clothes.Description = p.Description;
-                    context.SaveChanges();
-                    return true;
-                }
-                return false;
+                clothes.Name = p.Name;
+                clothes.Price = p.Price;
+                clothes.Supplier = p.Supplier;
+                clothes.Description = p.Description;
+                context.SaveChanges();
+                return true;
             }
             catch (Exception)
             {
                 return false;
             }
+        }
+        public List<ClothesVM> GetAllClothesView()
+        {
+            var lst = new List<ClothesVM>();
+            foreach(var x in GetAllClothes())
+            {
+                var y = _clothesDetailService.GetAllClothesDetail(x.ID).FirstOrDefault(x => x.Status == 1);
+                if (y!=null)
+                {
+                    lst.Add(new ClothesVM() { ID = y.ID, Name = x.Name, Price = x.Price, Quantity = y.Quantity });
+                }
+            }
+            return lst;
+        }
+        public List<Color> GetColorClothes(Guid id)
+        {
+            var list = (from a in context.ClothesDetails.Where(x => x.ClothesID == id)
+                        join b in context.Colors on a.ColorID equals b.ID
+                        select b).Distinct().ToList();
+            return list;
+        }
+        public List<Size> GetSizeClothes(Guid id)
+        {
+            var list = (from a in context.ClothesDetails.Where(x => x.ClothesID == id)
+                        join b in context.Sizes on a.SizeID equals b.ID
+                        select b).Distinct().ToList();
+            return list;
         }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model Assignment.ViewModels.CartVM
+
+<div style="width:100%;height:auto;background-color:whitesmoke;padding-top: 20px;padding-bottom: 250px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				@foreach (var item in @Model.ListClothes)
+				{
+					<div class="row" style="background-color:white;padding: 10px;">
+						<div class="col-md-1">
+							<img src="img/indexpt1.webp" alt="" style="width: 100%;">
+						</div>
+						<div class="col-md-5">
+							<p style="font-weight:bold">@item.Name</p>
+							<p>Loại: <span style="font-weight:bold">@item.Type</span>&ensp; Màu sắc: <span style="font-weight:bold">@item.Color</span> &ensp; Kích thước: <span style="font-weight:bold">@item.Size</span></p>
+						</div>
+						<div class="col-md-2">
+							<ul class="pagination" style="margin-top:12px">
+								<li class="page-item"><a class="page-link sl" href="#">-</a></li>
+								<li class="page-item"><a class="page-link sl" style="border-left: none;" href="#">@item.Quantity</a></li>
+								<li class="page-item"><a class="page-link sl" style="border-left: none" href="#">+</a></li>
+							</ul>
+						</div>
+						<div class="col-md-2">
+							<p>
+								Giá tiền:<br>
+								@item.Price
+							</p>
+						</div>
+						<div class="col-md-2">
+							<p style="color:gray">
+								Thành tiền:<br>
+								<span style="color:brown;font-weight: bold;">@item.SumPrice ₫</span><br>
+								<button style="border:none;background-color:white;margin-left:15px;"><img src="img/icons8-trash-24.png" alt=""></button>
+							</p>
+						</div>
+					</div>
+				}
+
+			</div>
+			<div class="col-md-3" style="padding:0px 10px 10px 10px">
+				<div class="ttdh">
+					<h5>Thông tin đơn hàng</h5>
+					<hr>
+					<div class="row">
+						<div class="col-md-4">
+							<p><strong>Tổng tiền:</strong></p>
+						</div>
+						<div class="col-md-8">
+							<p style="text-align: right;"><strong>@Model.SumPrice ₫</strong></p>
+						</div>
+					</div>
+					<hr>
+					<a class="btn btn-primary dk" style="width:100%;background-color:black;border-color:black;font-weight:bold" asp-area="" asp-controller="Home" asp-action="CreateBill">THANH TOÁN</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

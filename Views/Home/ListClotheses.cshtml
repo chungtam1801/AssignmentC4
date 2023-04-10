@@ -9,10 +9,11 @@
 		<strong>Fail: </strong>@TempData["AlertMessage"];
 	</div>
 }
+
 <h1>ListClotheses</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-area="" asp-controller="Home" class="btn btn-info" asp-action="Create">Create Clothes</a>
 </p>
 <table class="table">
     <thead>
@@ -67,10 +68,14 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.ID}) |
-                @Html.ActionLink("Details", "Details", new {  id=item.ID  }) |
+                @Html.ActionLink("Detail", "ListClothesDetail", new {  id=item.ID  }) |
                 @Html.ActionLink("Delete", "Delete", new {  id=item.ID  })
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@*@await Html.PartialAsync("CreateClothes",new Clothes())
+*@
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Assignment.Models.Bill>
+
+@{
+    ViewData["Title"] = "ManageBill";
+}
+
+<h1>ManageBill</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ListBillDetails", new {  id=item.ID  }) |
+                @Html.ActionLink("Hoàn tất thanh toán", "DoneBill", new {  id=item.ID  }) |
+                @Html.ActionLink("Hủy", "DeleteBill", new {  id=item.ID  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

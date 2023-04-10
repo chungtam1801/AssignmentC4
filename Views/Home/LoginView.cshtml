@@ -1,0 +1,23 @@
+﻿@model Assignment.Models.User
+
+<div style="background-color:whitesmoke;padding: 100px;">
+	<form style="width:450px;margin:0px auto;border: solid white 1px;background-color: white;padding: 20px;" asp-action="Login">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<p class="dn" style="text-align:center;font-weight:bold;font-size: 20px;margin-bottom: 0px;">ĐĂNG NHẬP TÀI KHOẢN</p>
+		<p class="dn" style="text-align:center;margin-bottom: 0px;">Nhập Username và mật khẩu</p>
+		<div class="mb-3">
+			<input asp-for="UserName" class="form-control dn" placeholder="Username" style="margin-bottom: 0px;">
+			<span asp-validation-for="UserName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<input asp-for="Password" type="password" class="form-control dn" id="exampleInputPassword1" placeholder="Mật khẩu">
+			<span asp-validation-for="UserName" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary dn" style="background-color:black;border-color:black;font-weight:bold">ĐĂNG NHẬP</button>
+		<p class="dn" style="margin-bottom:0px">Khách hàng mới? <a style="text-decoration:none;color:black;font-weight:bold" asp-area="" asp-controller="Home" asp-action="RegisterView">Tạo tài khoản</a></p>
+		<p class="dn">Quên mật khẩu? <a style="text-decoration:none;color:black;font-weight:bold">Khôi phục mật khẩu</a></p>
+	</form>
+</div>
+<script>
+
+</script>

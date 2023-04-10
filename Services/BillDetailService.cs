@@ -39,9 +39,9 @@ namespace Assignment.Services
             }
 
         }
-        public List<BillDetail> GetAllBillDetail()
+        public List<BillDetail> GetAllBillDetail(Guid id)
         {
-            return context.BillDetails.ToList();
+            return context.BillDetails.Where(x=>x.BillID==id).ToList();
         }
 
         public BillDetail GetBillDetailById(Guid id)

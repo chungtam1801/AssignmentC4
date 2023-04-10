@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Qhk31Y5QbVpU+elhqoCl5bh9ipQ99gPY8rDfJlylgTo=",
+  "Hash": "MxdujfjJrBkquohOjOLZ1Ea1fNc2rXMm1XmEQ8UEN+k=",
   "Source": "Assignment",
   "BasePath": "_content/Assignment",
   "Mode": "Default",
@@ -372,6 +372,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\icons8-trash-24.png"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Documents\\FPT_Polytechnic\\C#4\\Assignment\\Assignment\\wwwroot\\img\\icons8-user-24.png",
+      "SourceId": "Assignment",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Documents\\FPT_Polytechnic\\C#4\\Assignment\\Assignment\\wwwroot\\",
+      "BasePath": "_content/Assignment",
+      "RelativePath": "img/icons8-user-24.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\icons8-user-24.png"
     },
     {
       "Identity": "C:\\Users\\HP\\Documents\\FPT_Polytechnic\\C#4\\Assignment\\Assignment\\wwwroot\\img\\icons8-youtube-squared-50.png",

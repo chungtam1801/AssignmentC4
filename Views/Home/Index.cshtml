@@ -1,4 +1,4 @@
-﻿@model List<Assignment.Models.Clothes>
+﻿@model List<Assignment.ViewModels.ClothesVM>
 
 @{
 	ViewData["Title"] = "Home Page";
@@ -40,7 +40,7 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active btn-slide">
 							<div class="row">
-								@for (int i = 1; i <= 4; i++)
+								@*@for (int i = 1; i <= 4; i++)
 								{
 									<div class="col-md-3" style="margin-bottom:10px">
 										<div class="card" style="width: 100%">
@@ -54,9 +54,9 @@
 												<p class="card-text" align="left">
 													Giá: @Html.DisplayFor(modelItem => Model[i].Price)
 												</p>
-												@*<p class="card-text" align="left">
+												<p class="card-text" align="left">
 													Số lượng tồn: @Html.DisplayFor(modelItem => Model[i].Quantity)
-												</p>*@
+												</p>
 												<div class="row">
 													<div class="col-md-5" style="padding: 0px;">
 														<a class="btn btn-primary bh" style="padding-left: 17px;padding-right: 17px">Mua ngay</a>
@@ -68,12 +68,12 @@
 											</div>
 										</div>
 									</div>
-								}
+								}*@
 							</div>
 						</div>
 						<div class="carousel-item btn-slide">
 							<div class="row">
-								@for (int i = 1; i <= 4; i++)
+								@*@for (int i = 1; i <= 4; i++)
 								{
 									<div class="col-md-3" style="margin-bottom:10px">
 										<div class="card" style="width: 100%">
@@ -87,9 +87,9 @@
 												<p class="card-text" align="left">
 													Giá: @Html.DisplayFor(modelItem => Model[i].Price)
 												</p>
-												@*<p class="card-text" align="left">
+												<p class="card-text" align="left">
 													Số lượng tồn: @Html.DisplayFor(modelItem => Model[i].Quantity)
-												</p>*@
+												</p>
 												<div class="row">
 													<div class="col-md-5" style="padding: 0px;">
 														<a class="btn btn-primary bh" style="padding-left: 17px;padding-right: 17px">Mua ngay</a>
@@ -101,7 +101,7 @@
 											</div>
 										</div>
 									</div>
-								}
+								}*@
 							</div>
 						</div>
 					</div>
@@ -152,15 +152,15 @@
 							<p class="card-text" align="left">
 								Giá: @Html.DisplayFor(modelItem => item.Price)
 							</p>
-							@*<p class="card-text" align="left">
+							<p class="card-text" align="left">
 								Số lượng tồn: @Html.DisplayFor(modelItem => item.Quantity)
-							</p>*@
+							</p>
 							<div class="row">
 								<div class="col-md-5" style="padding: 0px;">
-									<a class="btn btn-primary bh" style="padding-left: 17px;padding-right: 17px">Mua ngay</a>
+									<a class="btn btn-primary bh" style="padding-left: 17px;padding-right: 17px" asp-area="" asp-controller="Home" asp-action="BuyNow" asp-route-id="@item.ID">Mua ngay</a>
 								</div>
 								<div class="col-md-7" style="padding: 0px;">
-									<a class="btn btn-primary bh" style="padding-left: 11px;padding-right: 11px">Thêm vào giỏ hàng</a>
+									<a asp-area="" asp-action="AddClothesToCart" asp-controller="Home" class="btn btn-primary bh" style="padding-left: 11px;padding-right: 11px" asp-route-id="@item.ID">Thêm vào giỏ hàng</a>
 								</div>
 							</div>
 						</div>
@@ -189,3 +189,5 @@
 	</nav>
 </div>
 
+@*@await Html.PartialAsync("CreateClothes",new Clothes())
+*@

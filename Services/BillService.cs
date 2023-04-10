@@ -1,5 +1,6 @@
 ﻿using Assignment.IServices;
 using Assignment.Models;
+using Assignment.ViewModels;
 
 namespace Assignment.Services
 {
@@ -53,8 +54,7 @@ namespace Assignment.Services
             try
             {
                 var bill = context.Bills.Find(p.ID);
-                //bill.Quantity = p.Quantity;
-                //bill.Price = p.Price;
+                bill.Status = p.Status;
                 context.SaveChanges();
                 return true;
             }
@@ -63,6 +63,24 @@ namespace Assignment.Services
 
                 throw;
             }
+        }
+        public List<BillChartVM> GetBillChartVM()
+        {
+            var lst = (from x in (from a in context.Bills.Where(x => x.CreateDate.Date > DateTime.Today.AddDays(-5))
+                                  join b in (from c in context.BillDetails group c by c.BillID into g select new { BillID = g.Key, SumPriceBill = g.Sum(d => d.Price) })
+                                  on a.ID equals b.BillID
+                                  select new
+                                  {
+                                      CreateDate = a.CreateDate,
+                                      SumPriceBill = b.SumPriceBill
+                                  })
+                       group x by x.CreateDate.Date into f
+                       select new BillChartVM()
+                       {
+                           CreateDate = f.Key,
+                           SumPrice = f.Sum(y => y.SumPriceBill)
+                       }).ToList();
+            return lst;        
         }
     }
 }
