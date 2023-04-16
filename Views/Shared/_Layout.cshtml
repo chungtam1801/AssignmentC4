@@ -27,7 +27,7 @@
 								</button>
 							</form>
 						</li>
-						@if (Context.Session.GetString("UserName") == null)
+						@if (String.IsNullOrEmpty(Context.Session.GetString("UserName")))
 						{
 							<li class="nav-item btn-nav1" style="margin-top:5px">
 								<a class="navbar-link" style="color:white;font-weight:bold;text-decoration:none;" asp-area="" asp-controller="Home" asp-action="RegisterView">
@@ -56,6 +56,7 @@
 										<li><a asp-area="" asp-controller="Home" asp-action="ListClotheses" class="dropdown-item">Quản lí sản phẩm</a></li>
 										<li><a asp-area="" asp-controller="Home" asp-action="Chart" class="dropdown-item">Thống kê</a></li>
 									}
+									<li><a asp-area="" asp-controller="Home" asp-action="Logout" class="dropdown-item">Đăng xuất</a></li>
 								</ul>
 							</li>
 						}

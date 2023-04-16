@@ -11,7 +11,7 @@ namespace Assignment.IServices
         public bool UpdateClothesDetail(ClothesDetail x);
         public bool DeleteClothesDetail(Guid id);
         public ClothesDetailVM GetClothesDetailVM(ClothesDetail clothesDetail, Clothes clothes);
-        public ClothesDetail? GetClothesDetailByColorAndSize(Guid? idColor, Guid? idSize, Guid idClothes);
-
+        public ClothesDetail? GetClothesDetailByColorAndSize(Guid idColor, Guid idSize, Guid idClothes);
+        public bool SetDefaultClothesDetail(Guid id);
     }
 }

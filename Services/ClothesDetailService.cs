@@ -21,7 +21,17 @@ namespace Assignment.Services
         {
             try
             {
-                if (GetAllClothesDetail(p.ClothesID).Any()) p.Status = 2;
+                if (GetAllClothesDetail(p.ClothesID).Any())
+                {
+                    var x = GetClothesDetailByColorAndSize(p.ColorID, p.SizeID, p.ClothesID);
+                    if (x != null)
+                    {
+                        x.Quantity += p.Quantity;
+                        context.SaveChanges();
+                        return true;
+                    }
+                    p.Status = 2; 
+                } 
                 else p.Status = 1;
                 context.ClothesDetails.Add(p);
                 context.SaveChanges();
@@ -61,9 +71,7 @@ namespace Assignment.Services
         {
             try
             {
-                var ClothesDetail = context.ClothesDetails.Find(p.ID);
-                //cart.Quantity = p.Quantity;
-                //cart.Price = p.Price;
+                var clothesDetail = context.ClothesDetails.Find(p.ID);
                 context.SaveChanges();
                 return true;
             }
@@ -79,16 +87,34 @@ namespace Assignment.Services
             obj.ID = clothesDetail.ID;
             obj.Name = clothes.Name;
             obj.Type = _clothesTypeService.GetClothesTypeById(clothes.ClothesTypeID).Name;
-            obj.Color = _colorService.GetColorById(clothesDetail.ColorID ?? new Guid()).Value;
-            obj.Size = _sizeService.GetSizeById(clothesDetail.SizeID ?? new Guid()).Value;
+            obj.Color = _colorService.GetColorById(clothesDetail.ColorID).Value;
+            obj.Size = _sizeService.GetSizeById(clothesDetail.SizeID).Value;
             obj.Price = clothes.Price;
             obj.Quantity = clothesDetail.Quantity;
             obj.Description = clothes.Description;
+            obj.ImageLocation = clothes.ImamgeLocation;
             return obj;
         }
-        public ClothesDetail? GetClothesDetailByColorAndSize(Guid? idColor,Guid? idSize,Guid idClothes)
+        public ClothesDetail? GetClothesDetailByColorAndSize(Guid idColor,Guid idSize,Guid idClothes)
         {
             return context.ClothesDetails.FirstOrDefault(x => x.ColorID == idColor && x.SizeID == idSize && x.ClothesID == idClothes);
+        }
+        public bool SetDefaultClothesDetail(Guid id)
+        {
+            try
+            {
+                var obj1 = context.ClothesDetails.FirstOrDefault(x => x.Status == 1);
+                obj1.Status = 2;
+                var obj2 = context.ClothesDetails.FirstOrDefault(x => x.ID == id);
+                obj2.Status = 1;
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
     }
 }

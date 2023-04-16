@@ -33,6 +33,10 @@ namespace Assignment.Services
             try
             {
                 Clothes p = context.Clotheses.Find(id);
+                foreach(var x in _clothesDetailService.GetAllClothesDetail(id))
+                {
+                    context.ClothesDetails.Remove(x);
+                }
                 context.Clotheses.Remove(p);
                 context.SaveChanges();
                 return true;
@@ -63,10 +67,7 @@ namespace Assignment.Services
             try
             {
                 var clothes = context.Clotheses.Find(p.ID);
-                clothes.Name = p.Name;
-                clothes.Price = p.Price;
-                clothes.Supplier = p.Supplier;
-                clothes.Description = p.Description;
+                clothes.ImamgeLocation=p.ImamgeLocation; 
                 context.SaveChanges();
                 return true;
             }
@@ -83,7 +84,7 @@ namespace Assignment.Services
                 var y = _clothesDetailService.GetAllClothesDetail(x.ID).FirstOrDefault(x => x.Status == 1);
                 if (y!=null)
                 {
-                    lst.Add(new ClothesVM() { ID = y.ID, Name = x.Name, Price = x.Price, Quantity = y.Quantity });
+                    lst.Add(new ClothesVM() { ID = y.ID, Name = x.Name, Price = x.Price, Quantity = y.Quantity ,ImageLocation=x.ImamgeLocation});
                 }
             }
             return lst;

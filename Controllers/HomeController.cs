@@ -117,8 +117,17 @@ namespace Assignment.Controllers
             //return PartialView("CreateClothes",c);
         }
         [HttpPost]
-        public IActionResult Create(CreateClothesVM p)
+        public IActionResult Create(CreateClothesVM p, [Bind] IFormFile imageFile)
         {
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", imageFile.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    imageFile.CopyTo(stream);
+                }
+                p.clothes.ImamgeLocation = imageFile.FileName;
+            }
             if (_clothesService.CreateClothes(p.clothes))
             {
                 p.clothesDetail.ClothesID = p.clothes.ID;
@@ -137,13 +146,19 @@ namespace Assignment.Controllers
             }
         }
         [HttpGet]
-        public IActionResult EditClothes(Guid id)
+        public IActionResult Edit(Guid id)
         {
             var clothes = _clothesService.GetClothesById(id);
             return View(clothes);
         }
-        public IActionResult Edit(Clothes p)
+        public IActionResult Edit(Clothes p,[Bind] IFormFile imageFile)
         {
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", imageFile.FileName);
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                imageFile.CopyTo(stream);
+            }
+            p.ImamgeLocation = imageFile.FileName;
             if (_clothesService.UpdateClothes(p))
             {
                 return RedirectToAction("ListClotheses");
@@ -153,7 +168,7 @@ namespace Assignment.Controllers
                 return RedirectToAction("ListClotheses");
             }
         }
-        public IActionResult DeleteClothes(Guid id)
+        public IActionResult Delete(Guid id)
         {
             if (_clothesService.DeleteClothes(id))
             {
@@ -199,6 +214,11 @@ namespace Assignment.Controllers
             {
                 return BadRequest();
             }
+        }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("UserName", "");
+            return RedirectToAction("Index");
         }
         //[Route("CreateClothesDetailView")]
         //public IActionResult CreateClothesDetail()
@@ -372,5 +392,10 @@ namespace Assignment.Controllers
             _billService.UpdateBill(obj);
             return RedirectToAction("ManageBill");
 		}
+        public IActionResult SetDefaultClothesDetail(Guid id)
+        {
+            _clothesDetailService.SetDefaultClothesDetail(id);
+            return RedirectToAction("ListClothesDetail", new RouteValueDictionary(new { Controller = "Home", Action = "ListClothesDetail", id = new Guid(HttpContext.Session.GetString("ClothesID") ?? "") }));
+        }
     }
 }

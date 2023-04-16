@@ -123,6 +123,10 @@ namespace Assignment.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("ImamgeLocation")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -153,13 +157,13 @@ namespace Assignment.Migrations
                     b.Property<Guid>("ClothesID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ColorID")
+                    b.Property<Guid>("ColorID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SizeID")
+                    b.Property<Guid>("SizeID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
@@ -356,11 +360,15 @@ namespace Assignment.Migrations
 
                     b.HasOne("Assignment.Models.Color", "Color")
                         .WithMany("ClothesDetails")
-                        .HasForeignKey("ColorID");
+                        .HasForeignKey("ColorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Assignment.Models.Size", "Size")
                         .WithMany("ClothesDetails")
-                        .HasForeignKey("SizeID");
+                        .HasForeignKey("SizeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Clothes");
 

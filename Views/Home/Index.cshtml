@@ -31,7 +31,7 @@
 		</button>
 	</div>
 
-	<div class="container">
+	@*<div class="container">
 		<div class="row" style="margin-top:20px">
 			<div class="col-md-12" style="background-color:brown;padding: 10px;border-radius: 5px;">
 				<h5 style="font-weight:bold;color:white" align="center">SẢN PHẨM HOT</h5>
@@ -40,7 +40,7 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active btn-slide">
 							<div class="row">
-								@*@for (int i = 1; i <= 4; i++)
+								@for (int i = 0; i <= 3; i++)
 								{
 									<div class="col-md-3" style="margin-bottom:10px">
 										<div class="card" style="width: 100%">
@@ -68,12 +68,12 @@
 											</div>
 										</div>
 									</div>
-								}*@
+								}
 							</div>
 						</div>
 						<div class="carousel-item btn-slide">
 							<div class="row">
-								@*@for (int i = 1; i <= 4; i++)
+								@for (int i = 0; i <= 3; i++)
 								{
 									<div class="col-md-3" style="margin-bottom:10px">
 										<div class="card" style="width: 100%">
@@ -101,7 +101,7 @@
 											</div>
 										</div>
 									</div>
-								}*@
+								}
 							</div>
 						</div>
 					</div>
@@ -120,7 +120,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>*@
 	<!-- items -->
 	<div class="container text-center" style="margin-top:20px;">
 		<form style="margin-bottom:10px" align="right">
@@ -143,7 +143,7 @@
 				<div class="col-md-3" style="margin-bottom:10px">
 					<div class="card" style="width: 100%">
 						<a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@item.ID">
-							<img src="img/indexpt1.webp" class="card-img-top" alt="...">
+							<img src="~/img/@item.ImageLocation" class="card-img-top" alt="...">
 						</a>
 						<div class="card-body">
 							<h5 class="card-title" align="left">
